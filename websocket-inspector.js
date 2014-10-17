@@ -10,36 +10,31 @@ let WebSocketInspector = exports.WebSocketInspector = protocol.ActorClass({
     classDescription: "Inspects the WebSockets",
     classID: Components.ID("{CD00FB51-8399-4A59-A823-219568811EB3}"),
     contractID: "@mozilla.org/web-socket-inspector;1",
-    initialize: function(conn, tabActor) {
+    initialize: function(conn) {
 	protocol.Actor.prototype.initialize.call(this, conn);
-	this.docshell = tabActor.docShell;
     },
     onOpen: function() {
-	/*
-	msg = { "from": wsactor, 
-		"type": send, 
+	msg = { "from": this.actorID, 
+		"type": "send", 
 		"dataAttribute": "data", 
 		"content": "open"
 	      };
-	*/
+	this.send(msg);
     },
     onClose: function() {
-	/*
-	msg = { "from": wsactor2, 
+	msg = { "from": this.actorID,
 		"type": "close",
 		"wasClean": "false",
 		"code": "0",
-		"reason":””
+		"reason":""
 	      };
-	*/
+	this.send(msg);
     },
     onError: function() {
-	/*
-	msg = { "from": wsactor3, 
-		"type": “error”
+	msg = { "from": this.actorID,
+		"type": "error"
 	      };
-	msg = "error";
-	*/
+	this.send(msg);
     },
     onMessage: function(data, messageType) {
 	
