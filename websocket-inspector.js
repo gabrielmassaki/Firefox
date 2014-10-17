@@ -19,7 +19,7 @@ let WebSocketInspector = exports.WebSocketInspector = protocol.ActorClass({
 		"dataAttribute": "data", 
 		"content": "open"
 	      };
-	this.send(msg);
+	this.conn.send(msg);
     },
     onClose: function() {
 	msg = { "from": this.actorID,
@@ -28,13 +28,13 @@ let WebSocketInspector = exports.WebSocketInspector = protocol.ActorClass({
 		"code": "0",
 		"reason":""
 	      };
-	this.send(msg);
+	this.conn.send(msg);
     },
     onError: function() {
 	msg = { "from": this.actorID,
 		"type": "error"
 	      };
-	this.send(msg);
+	this.conn.send(msg);
     },
     onMessage: function(data, messageType) {
 	
