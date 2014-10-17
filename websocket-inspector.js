@@ -37,6 +37,9 @@ let WebSocketInspector = exports.WebSocketInspector = protocol.ActorClass({
 	this.conn.send(msg);
     },
     onMessage: function(data, messageType) {
-	
+	msg = { "from": this.actorID,
+		"type": messageType,
+		"content": data
+	};
     }
 });
